@@ -34,8 +34,10 @@ static NSString *reuseIdentifier = @"shop";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // 初始化CollectionView
     [self initCollectooView];
     
+    // 初始化上拉+下拉刷新
     [self initRefresh];
 }
 
@@ -58,7 +60,7 @@ static NSString *reuseIdentifier = @"shop";
     
     // 上拉刷新
     _collectionView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreShops)];
-    _collectionView.footer.hidden = YES;
+    _collectionView.footer.hidden = YES; // 一开始没有事数据隐藏footer
 }
 
 - (void)loadNewShops
@@ -88,6 +90,7 @@ static NSString *reuseIdentifier = @"shop";
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    // 根据数据源显示上拉刷新控件
     self.collectionView.footer.hidden = self.shops.count == 0;
     return self.shops.count;
 }
